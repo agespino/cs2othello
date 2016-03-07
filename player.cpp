@@ -15,7 +15,7 @@ Player::Player(Side side) {
      * 30 seconds.
      */
 }
-
+//This is a small change to the player.cpp file! 
 /*
  * Destructor for the player.
  */
