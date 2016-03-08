@@ -107,7 +107,16 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     {
 
         std::vector<Move*> moves = possibleMoves();
-        board.doMove(moves[0], side);
+        int max_index = 0 //index of the move whose square has the highest known heuristic value
+        for (int i = 0; i < moves.size(); i++)
+        {
+            if (getSquareWeight(moves[i]) > getSquareWeight(moves[max_index])
+            {
+                max_index = i;
+            }
+
+        }
+        board.doMove(moves[max_index], side);
         return moves[0];
     }
     else
