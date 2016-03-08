@@ -12,6 +12,7 @@ Player::Player(Side side) {
     /* I made a comment 
     */
     board = Board();
+    this->side = side;
 
 
     /* 
