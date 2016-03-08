@@ -73,6 +73,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      {
         opside = BLACK;
      }
-     board.doMove(*opponentsMove, opside);
+     board.doMove(opponentsMove, opside);
+
     return NULL;
 }
