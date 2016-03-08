@@ -1,7 +1,7 @@
 CC          = g++
 CFLAGS      = -Wall -ansi -pedantic -ggdb
 OBJS        = player.o board.o
-PLAYERNAME  = Ritwik "Itachi" Anand
+PLAYERNAME  = Ritwik_Itachi_Anand
 
 all: $(PLAYERNAME) testgame
 	

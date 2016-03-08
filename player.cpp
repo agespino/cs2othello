@@ -1,5 +1,5 @@
 #include "player.h"
-#include <vector>
+
 
 /*
  * Constructor for the player; initialize everything here. The side your AI is
@@ -29,21 +29,21 @@ Player::Player(Side side) {
 Player::~Player() {
 }
 
-std::vector<Move> Player::possibleMoves()
+std::vector<Move*> Player::possibleMoves()
 {
+    std::vector<Move*> result;
     for(int i = 0; i < 8; i++)
     {
         for(int j = 0; j < 8; j++)
         {
-            move = Move(x, y); 
-           if (checkMove(move, side)) 
+           Move *move = new Move(i, j); 
+           if (board.checkMove(move, side)) 
            {
-            return move;
-
+               result.push_back(move);    
            }
-
         }
     }
+    return result;
 }
 
 /*
@@ -75,5 +75,15 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      }
      board.doMove(opponentsMove, opside);
 
-    return NULL;
+     if(board.hasMoves(side))
+    {
+
+        std::vector<Move*> moves = possibleMoves();
+        return moves[0];
+    }
+    else
+    {
+        return NULL;
+    }
+
 }
