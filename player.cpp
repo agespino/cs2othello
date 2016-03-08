@@ -56,32 +56,10 @@ int Player::getSquareWeight(Move move)
     weight[2] = {10, 1, 4, 2, 2, 4, 1, 10};
     weight[3] = {6, 1, 2, 1, 1, 2, 1, 6};
     weight[4] = {6, 1, 2, 1, 1, 2, 1, 6};
-    weight[5] = {10, 1, 4, 2, 2, 4, 1, 10}
+    weight[5] = {10, 1, 4, 2, 2, 4, 1, 10};
     weight[6] = {-20, -25, 1, 1, 1, 1, -25, -20};
     weight[7] = {30, -20, 10, 6, 6, 20, -20, 30};
-    // We first address corner pieces
-    if((x == 0 && y == 0)||(x == 0 && y == 7)||(x == 7 && y == 0)||(x == 7 && y == 7))
-    {
-        return 5;
-    }
-    // Next we consider pieces near corners, dividing into 
-    else if ((x == 1 && y == 0) || (x == 0 && y ==1) || (x == 0 && y == 6) || (x == 1 && y == 7)
-        ||(x == 0 && y == 6) || (x == 7 && y == 1) || (x == 7 && y == 6)||(x == 6 && y ==7))
-    {
-        return -1;
-    }
-    else if((x == 1 && y ==1) || (x == 6 && y ==1) || (x == 6 && y == 1) || (x == 6 && y == 6))
-    {
-        return -3;
-    }
-    else if( x == 0 || x == 7 || y == 0 || y == 7)
-    {
-        return 2;
-    }
-    else 
-    {
-        return 1;
-    }
+    return weight[x][y];
 
 }
 
