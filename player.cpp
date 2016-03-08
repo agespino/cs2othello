@@ -77,8 +77,14 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
         opside = BLACK;
      }
      board.doMove(opponentsMove, opside);
+<<<<<<< HEAD
      std::cerr << "OINK" << endl;
     if(board.hasMoves(side))
+=======
+     // Now we decide which move to make. 
+
+     if(board.hasMoves(side))
+>>>>>>> 8416b1a2c4d355abbf15fe79884380e19b3f75be
     {
         std::cerr << "We have moves" << std::endl;
         std::vector<Move*> moves = possibleMoves();
