@@ -74,6 +74,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
         opside = BLACK;
      }
      board.doMove(opponentsMove, opside);
+     // Now we decide which move to make. 
 
      if(board.hasMoves(side))
     {
