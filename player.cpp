@@ -1,4 +1,5 @@
 #include "player.h"
+#include <vector>
 
 /*
  * Constructor for the player; initialize everything here. The side your AI is
@@ -28,6 +29,23 @@ Player::Player(Side side) {
 Player::~Player() {
 }
 
+std::vector<Move> Player::possibleMoves()
+{
+    for(int i = 0; i < 8; i++)
+    {
+        for(int j = 0; j < 8; j++)
+        {
+            move = Move(x, y); 
+           if (checkMove(move, side)) 
+           {
+            return move;
+
+           }
+
+        }
+    }
+}
+
 /*
  * Compute the next move given the opponent's last move. Your AI is
  * expected to keep track of the board on its own. If this is the first move,
@@ -40,6 +58,7 @@ Player::~Player() {
  * The move returned must be legal; if there are no valid moves for your side,
  * return NULL.
  */
+
 Move *Player::doMove(Move *opponentsMove, int msLeft) {
     /* 
      * TODO: Implement how moves your AI should play here. You should first
