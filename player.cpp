@@ -46,6 +46,34 @@ std::vector<Move*> Player::possibleMoves()
     return result;
 }
 
+int Player::getSquareWeight(Move move)
+{
+    int x = move.getX();
+    int y = move.getY();
+    if((x == 0 && y == 0)||(x == 0 && y == 7)||(x == 7 && y == 0)||(x == 7 && y == 7))
+    {
+        return 5;
+    }
+    else if ((x == 1 && y == 0) || (x == 0 && y ==1) || (x == 0 && y == 6) || (x == 1 && y == 7)
+        ||(x == 0 && y == 6) || (x == 7 && y == 1) || (x == 7 && y == 6)||(x == 6 && y ==7))
+    {
+        return -1;
+    }
+    else if((x == 1 && y ==1) || (x == 6 && y ==1) || (x == 6 && y == 1) || (x == 6 && y == 6))
+    {
+        return -3;
+    }
+    else if( x == 0 || x == 7 || y == 0 || y == 7)
+    {
+        return 2;
+    }
+    else 
+    {
+        return 1;
+    }
+
+}
+
 /*
  * Compute the next move given the opponent's last move. Your AI is
  * expected to keep track of the board on its own. If this is the first move,

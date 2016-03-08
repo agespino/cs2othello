@@ -14,6 +14,7 @@ public:
     ~Player();
 
     std::vector<Move*> possibleMoves();
+    int getSquareWeight(Move move);
     Move *doMove(Move *opponentsMove, int msLeft);
 
     // Flag to tell if the player is running within the test_minimax context
