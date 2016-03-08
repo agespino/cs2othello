@@ -107,8 +107,27 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     {
 
         std::vector<Move*> moves = possibleMoves();
-        board.doMove(moves[0], side);
-        return moves[0];
+        std:: vector<int> weights;
+
+        for(int i = 0; i < possibleMoves().size(); i ++ )
+        {
+            weights.push_back(getSquareWeight(possibleMoves[i]));
+        }
+        int max = weights[0];
+        int max_index = 0;
+
+        for int(i = 0; i < weights.size(); i++)
+        {
+            if (weights[i] > max)
+            {
+                max = weights[i];
+                max_index = i;
+            }
+
+        } 
+
+        board.doMove(moves[max_index], side);
+        return moves[max_index];
     }
     else
     {
