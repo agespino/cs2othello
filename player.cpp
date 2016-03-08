@@ -8,12 +8,10 @@
  */
 Player::Player(Side side) {
     // Will be set to true in test_minimax.cpp.
-         std::cerr << "OINK" << endl;
     testingMinimax = false;
 
     /* I made a comment 
     */
-     std::cerr << "OINK" << endl;
     board = Board();
     this->side = side;
 
@@ -60,13 +58,12 @@ std::vector<Move*> Player::possibleMoves()
  * The move returned must be legal; if there are no valid moves for your side,
  * return NULL.
  */
-  
+
 Move *Player::doMove(Move *opponentsMove, int msLeft) {
     /* 
      * TODO: Implement how moves your AI should play here. You should first
      * process the opponent's opponents move before calculating your own move
      */ 
-     std::cerr << "OINK" << endl;
      Side opside;
      if (side == BLACK)
      {
@@ -77,16 +74,10 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
         opside = BLACK;
      }
      board.doMove(opponentsMove, opside);
-<<<<<<< HEAD
-     std::cerr << "OINK" << endl;
-    if(board.hasMoves(side))
-=======
-     // Now we decide which move to make. 
 
-     if(board.hasMoves(side))
->>>>>>> 8416b1a2c4d355abbf15fe79884380e19b3f75be
+    if(board.hasMoves(side))
     {
-        std::cerr << "We have moves" << std::endl;
+
         std::vector<Move*> moves = possibleMoves();
         board.doMove(moves[0], side);
         return moves[0];
