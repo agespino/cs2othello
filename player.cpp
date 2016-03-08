@@ -46,19 +46,19 @@ std::vector<Move*> Player::possibleMoves()
     return result;
 }
 
-int Player::getSquareWeight(Move move)
+int Player::getSquareWeight(Move *move)
 {
-    int x = move.getX();
-    int y = move.getY();
-    int weight[8][8];
-    weight[0] = {30, -20, 10, 6, 6, 10, -20, 30};
-    weight[1] = {-20, -25, 1, 1, 1, 1, -25, -20};
-    weight[2] = {10, 1, 4, 2, 2, 4, 1, 10};
-    weight[3] = {6, 1, 2, 1, 1, 2, 1, 6};
-    weight[4] = {6, 1, 2, 1, 1, 2, 1, 6};
-    weight[5] = {10, 1, 4, 2, 2, 4, 1, 10};
-    weight[6] = {-20, -25, 1, 1, 1, 1, -25, -20};
-    weight[7] = {30, -20, 10, 6, 6, 20, -20, 30};
+    int x = move->getX();
+    int y = move->getY();
+    int weight[8][8]={{30, -20, 10, 6, 6, 10, -20, 30},
+    {-20, -25, 1, 1, 1, 1, -25, -20},
+    {10, 1, 4, 2, 2, 4, 1, 10},
+    {6, 1, 2, 1, 1, 2, 1, 6},
+    {6, 1, 2, 1, 1, 2, 1, 6},
+    {10, 1, 4, 2, 2, 4, 1, 10},
+    {-20, -25, 1, 1, 1, 1, -25, -20},
+    {30, -20, 10, 6, 6, 20, -20, 30}};
+    
     return weight[x][y];
 
 }
@@ -96,17 +96,17 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
     {
 
         std::vector<Move*> moves = possibleMoves();
-        int max_index = 0 //index of the move whose square has the highest known heuristic value
-        for (int i = 0; i < moves.size(); i++)
+        int max_index = 0; //index of the move whose square has the highest known heuristic value
+        for (unsigned i = 0; i < moves.size(); i++)
         {
-            if (getSquareWeight(moves[i]) > getSquareWeight(moves[max_index])
+            if (getSquareWeight(moves[i]) > getSquareWeight(moves[max_index]))
             {
                 max_index = i;
             }
 
         }
         board.doMove(moves[max_index], side);
-        return moves[0];
+        return moves[max_index];
     }
     else
     {
