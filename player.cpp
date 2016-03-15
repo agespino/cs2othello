@@ -1,5 +1,15 @@
 #include "player.h"
 
+    int weight[8][8]={
+    {30, -20, 10, 6, 6, 10, -20, 30},
+    {-20, -25, 1, 2, 2, 1, -25, -20},
+    {10, 1, 4, 2, 2, 4, 1, 10},
+    {6, 2, 2, 1, 1, 2, 2, 6},
+    {6, 2, 2, 1, 1, 2, 2, 6},
+    {10, 1, 4, 2, 2, 4, 1, 10},
+    {-20, -25, 1, 2, 2, 1, -25, -20},
+    {30, -20, 10, 6, 6, 10, -20, 30}};//global variable
+    
 
 /*
  * Constructor for the player; initialize everything here. The side your AI is
@@ -14,7 +24,6 @@ Player::Player(Side side) {
     */
     board = Board();
     this->side = side;
-
 
     /* 
      * TODO: Do any initialization you need to do here (setting up the board,
@@ -50,17 +59,46 @@ int Player::getSquareWeight(Move *move)
 {
     int x = move->getX();
     int y = move->getY();
-    int weight[8][8]={{30, -20, 10, 6, 6, 10, -20, 30},
-    {-20, -25, 1, 1, 1, 1, -25, -20},
-    {10, 1, 4, 2, 2, 4, 1, 10},
-    {6, 1, 2, 1, 1, 2, 1, 6},
-    {6, 1, 2, 1, 1, 2, 1, 6},
-    {10, 1, 4, 2, 2, 4, 1, 10},
-    {-20, -25, 1, 1, 1, 1, -25, -20},
-    {30, -20, 10, 6, 6, 20, -20, 30}};
-    
+
     return weight[x][y];
 
+}
+
+void Player::updateWeights(Move *move)
+{
+    if(move == NULL)
+    {
+        return;
+    }
+    int x = move->getX();
+    int y = move->getY();
+
+    if(x == 0 && y ==0)
+    {
+        weight[x + 1][y] *= -1;
+        weight[x][y + 1] *= -1;
+        weight[x +1][y + 1] *= -1;
+    }
+    else if(x == 7 && y ==0)
+    {
+        weight[x - 1][y] *= -1;
+        weight[x][y + 1] *= -1;
+        weight[x - 1][y + 1] *= -1;
+    }
+    else if(x == 7 && y ==7)
+    {
+        weight[x - 1][y] *= -1;
+        weight[x][y - 1] *= -1;
+        weight[x - 1][y - 1] *= -1;
+    }
+    else if(x == 0 && y == 7)
+    {
+        weight[x + 1][y] *= -1;
+        weight[x][y - 1] *= -1;
+        weight[x + 1][y - 1] *= -1;
+    }
+
+    return;
 }
 
 /*
@@ -91,6 +129,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
         opside = BLACK;
      }
      board.doMove(opponentsMove, opside);
+     updateWeights(opponentsMove);
 
     if(board.hasMoves(side))
     {
@@ -106,6 +145,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 
         }
         board.doMove(moves[max_index], side);
+        updateWeights(moves[max_index]);
         return moves[max_index];
     }
     else
